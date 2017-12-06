@@ -1,4 +1,106 @@
 #!/usr/bin/env python3
 import random as r
 import skilstak.colors as c
+import time as t
+
+opposite = {
+    "ROCK": "SCISSORS",
+    "SCISSORS": "PAPER",
+    "PAPER": "ROCK"
+}
+
+def welcome():  # The Welcome Box
+    print(c.green + '''ROCK, PAPER, SCISSORS!
+    Can you beat all the levels! I really doubt it.
+    Choose a gamemode to begin, by selecting the number.
+    You can exit the game at any time by typing "exit".''')
+    print('''
+{}Select a level, by inputing the number.
+{}1. {}TooPossible
+{}2. {}Easy
+{}3. {}Hard
+{}4. {}Impossible
+'''.format(c.green,c.base01,c.base1,c.base01,c.base1,c.base01,c.base1,c.base01,c.base1))
+
+def levelselect():
+    level = input(c.yellow + '> ' + c.cyan)
+    if level == '1':
+        return "1"
+    elif level == '2':
+        return "2"
+    elif level == '3':
+        return "3"
+    elif level == '4':
+        return "4"
+    elif level == 'exit' or level == 'e':
+        exit()
+    elif level == 'help' or level == 'h' or level == 'list' or level == 'l':
+        print('''
+{}Select a level, by inputing the number.
+{}1. {}TooPossible
+{}2. {}Easy
+{}3. {}Hard
+{}4. {}Impossible
+'''.format(c.green,c.base01,c.base1,c.base01,c.base1,c.base01,c.base1,c.base01,c.base1))
+    else:
+        return "nope"
+def win(item): # I don't feel like typing all the things
+    print('{}I chose {}' + opposite[item] + '{}, you chose {}' + item + '!{} ;-;'.format(c.green,c.magenta,c.green,c.magenta,c.green))
+
+def lose(item): # Even less things to type
+    print('{}You chose {}' + item + '{}, I chose {}' + opposite[item] + '!{} HA!'.format(c.orange, c.magenta, c.orange, c.magenta, c.orange))
+
+def toopossible():  # Opposite of neverwin/impossible: You can't lose!
+    print(c.green + 'Welcome to the TooPossible gamemode! "r", "p", or "s". "exit" to stop the game.')
+    while True:
+        entry = input(c.red + '> ' + c.cyan)
+        if entry == 'r':
+            win("ROCK")
+        elif entry == 'p':
+            win("PAPER")
+        elif entry == 's':
+            win("SCISSORS")
+        elif entry == 'exit' or entry == 'e':
+            print(c.green + 'Select a new level!')
+            break
+        else:
+            print(c.magenta + 'Not an Option.')
+
+def easy(): # Random selection for the opponent
+    pass
+
+def hard(): # Random selection, but higher chance of slecting winning move
+    pass
+
+def neverwin(): # Impossible to win! Unless the code if modified, it is literally impossible to win.
+    print(c.green + 'Welcome to the Impossible gamemode! "r", "p", or "s". "exit" to stop the game.')
+    while True:
+        entry = input(c.red + '> ' + c.cyan)
+        if entry == 'r':
+            lose("ROCK")
+        elif entry == 'p':
+            lose("PAPER")
+        elif entry == 's':
+            lose("SCISSORS")
+        elif entry == 'exit' or entry == 'e':
+            print(c.green + 'Select a new level!')
+            break
+        else:
+            print(c.magenta + 'Not an Option.')
+
+# The Great Calling of Functions begins.
+welcome()
+while True:
+    level = levelselect()
+    if level == "1":
+        toopossible()
+    elif level == "2":
+        easy()
+    elif level == "3":
+        hard()
+    elif level == "4":
+        neverwin()
+    elif level == "nope":
+        print(c.magenta + "Not an Option!")
+
 
